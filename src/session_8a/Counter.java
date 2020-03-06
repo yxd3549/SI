@@ -51,11 +51,13 @@ public class Counter extends Thread {
         c0.start();
         c1.start();
 
-        try {
-            c0.join();
-            c0.join();
-        }catch (InterruptedException ie){
-            System.out.println(ie.getMessage());
-        }
+//        try {
+//            c0.join();
+//            c0.join();
+//        }catch (InterruptedException ie){
+//            System.out.println(ie.getMessage());
+//        }
+
+        System.out.println("done");
     }
 }
