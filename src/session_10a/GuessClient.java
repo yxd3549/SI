@@ -78,6 +78,16 @@ public class GuessClient implements GuessProtocol {
                 // check response
 
                 // TODO: Step 2
+                String response = networkIn.nextLine();
+                if(response.equals(LOW)){
+                    System.out.println(LOW);
+                } else if(response.equals(HIGH)){
+                    System.out.println(HIGH);
+                } else{
+                    System.out.println(CORRECT);
+                    this.networkOut.println(GuessServer.ABORT);
+                    break;
+                }
 
             } else {
                 this.networkOut.println(GuessServer.ABORT);

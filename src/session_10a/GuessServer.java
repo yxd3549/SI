@@ -86,9 +86,18 @@ public class GuessServer implements GuessProtocol {
             } else { // assume it is "GUESS #"
                 ++this.numGuesses;
                 int guess = Integer.parseInt(response[1]);
-                System.out.print("Your guess of " + guess);
+                System.out.print("Your guess of " + guess + " is ");
 
-                // TODO: Step 1
+                if(guess == this.secretNumber){
+                    System.out.println(CORRECT);
+                    this.networkOut.println(CORRECT);
+                }else if (guess < this.secretNumber){
+                    System.out.println(LOW);
+                    this.networkOut.println(LOW);
+                }else{
+                    System.out.println(HIGH);
+                    this.networkOut.println(HIGH);
+                }
             }
         }
         // finally send to the client the secret number and number of guesses
