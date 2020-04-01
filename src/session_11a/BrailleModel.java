@@ -127,11 +127,15 @@ public class BrailleModel {
         // get the corresponding letter from the map for this bit string and
         // set the the letter data member to it
 
-        // TODO
+        if(letters.containsKey(bitString)){
+            this.letter = letters.get(bitString);
+        } else {
+            this.letter = UNKNOWN;
+        }
 
         // call alertObservers() so the GUI sees the update
 
-        // TODO
+        alertObservers();
     }
 
     /**

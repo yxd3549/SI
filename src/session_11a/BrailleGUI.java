@@ -146,11 +146,19 @@ public class BrailleGUI extends Application implements Observer<BrailleModel> {
             // ask the model for the state of each dot and create a
             // bitstring of 0's (off) and 1's (on).
 
-            // TODO
+            int i = 6;
+            while(i != 0){
+                if(model.getDot(i)){
+                    bitString = bitString.concat("1");
+                } else {
+                    bitString = bitString.concat("0");
+                }
+                i--;
+            }
 
             // inform the model of the bit string
+            model.translate(bitString);
 
-            // TODO
         });
         buttonBox.getChildren().add(translateButton);
         buttonBox.setAlignment(Pos.CENTER);
@@ -205,14 +213,18 @@ public class BrailleGUI extends Application implements Observer<BrailleModel> {
     public void update(BrailleModel brailleModel) {
         // get the letter from the last bit string translated
 
-        // TODO
+        char letter = model.getLetter();
 
         // set the text for the letter
 
-        // TODO
+        this.letter.setText(Character.toString(letter));
 
         // if the letter is known, make it green, otherwise red
 
-        // TODO
+        if(letter == BrailleModel.UNKNOWN){
+            this.letter.setFill(Color.RED);
+        } else {
+            this.letter.setFill(Color.GREEN);
+        }
     }
 }
