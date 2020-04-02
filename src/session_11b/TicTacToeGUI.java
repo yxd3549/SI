@@ -14,62 +14,79 @@ import session_11a.Observer;
 public class TicTacToeGUI extends Application implements Observer<TicTacToeModel> {
 
 
-
+    // TODO: Add a variable to store the model
     private TicTacToeModel model;
+
+    // TODO: Add a variable for the gridPane to store the cells/buttons
     private GridPane gridPane;
+
+    // TODO: Add a variable for the Label that will store text at the top
     private Label text;
 
     @Override
     public void init() {
-        // create the model and add ourselves as an observer
-        this.model = new TicTacToeModel();
-        this.model.addObserver(this);
+        // TODO: create the model and add ourselves as an observer
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        gridPane = new GridPane();
 
+        // TODO: Initialize the Label.
+        //  It should display "_'s turn", where _ is the current mark in the model
+
+
+        // TODO: Initialize the gridPane
+
+        // Create the buttons
         for(int row = 0; row < 3; row++){
             for (int col = 0; col < 3; col++){
-                Button button = new Button();
-                gridPane.add(button, row, col);
-                button.setText("-");
+                // TODO: Create a Button
+                //  - Set the button's text to "-".
+
+
+                // For reasons that won't make sense until you learn more about programming languages and lambdas,
+                // you need these "final" variables to use inside the button's setOnAction
                 int finalCol = col;
                 int finalRow = row;
-                button.setOnAction( event -> {
-                    model.placeMark(finalCol, finalRow);
-                });
+
+                // TODO: Make it so that, when we click a button, we place a mark in the model at the correct location.
+                //  Remember the board is stored in a Row then Column fashion
+
+
+                // TODO: Add the button to the GridPane
+                //  remeber the grid stores values in a x then y fashion
             }
         }
 
-        text = new Label("X's Turn");
+        // TODO: Create a button to reset the board
+        //  Make it so that when you click on it, the model restarts the board
 
-        Button resetButton = new Button("Restart");
-        resetButton.setOnAction(event -> {
-            this.model.restart();
-        });
 
-        VBox vbox = new VBox();
-        vbox.getChildren().addAll(text, gridPane, resetButton);
+        // TODO: Create a container to put all your nodes in
+        //  Add all the nodes to this container
 
-        Scene scene = new Scene(vbox);
+
+        // TODO: Create a new Scene
+        //  Set the stage's scene to the new scene
+        //  Show the stage
+        Scene scene = new Scene(new VBox());
         stage.setScene(scene);
         stage.show();
     }
 
     @Override
     public void update(TicTacToeModel ticTacToeModel) {
+
+        // TODO: Update the label to reflect the new turn
         this.text.setText(this.model.getTurn() + "'s turn");
 
-        for(int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                Button button = getNodeFromGridPane(gridPane, col, row);
-                button.setText(Character.toString(model.getCharacter(row, col)));
-            }
-        }
+        // TODO: Update the gridPane to reflect the changes to the board
     }
 
+    /**
+     * You'll need this function in your update method.
+     * You're welcome :)
+     */
     private Button getNodeFromGridPane(GridPane gridPane, int col, int row) {
         for (Node node : gridPane.getChildren()) {
             if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
