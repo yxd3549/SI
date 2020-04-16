@@ -21,7 +21,7 @@ public class Rule {
             Coordinate cell = cells[i];
             numbers.add(board[cell.getRow()][cell.getCol()]);
         }
-        Collections.sort(numbers);
+        Collections.sort(numbers, Collections.reverseOrder());
 
         if (operation == Operation.SUM){
             int total = 0;
