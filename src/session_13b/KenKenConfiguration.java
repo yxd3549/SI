@@ -144,6 +144,7 @@ public class KenKenConfiguration implements Configuration{
         // TODO: Check that no number is repeated in any column
 
 
+
         return true;
     }
 
