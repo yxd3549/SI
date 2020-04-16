@@ -26,40 +26,24 @@ public class Rule {
 
     /**
      * This method checks whether the cells in this region satisfy the requirements
+     * TODO: Group B
      */
     public boolean isSatisfied(int[][] board){
         ArrayList<Integer> numbers = new ArrayList<>();
-        for(int i = 0; i < cells.length; i++){
-            Coordinate cell = cells[i];
-            numbers.add(board[cell.getRow()][cell.getCol()]);
-        }
+        // TODO: Get all the numbers from the board and stored them in the numbers array
+
+
+        // This line sorts the array in descending order so that the subtraction
+        // works properly
         Collections.sort(numbers, Collections.reverseOrder());
 
-        if (operation == Operation.SUM){
-            int total = 0;
-            for(int number: numbers){
-                total += number;
-            }
-            return total == goal;
+        // TODO: Check which operation we're dealing with
+        //  If we have a sum, we want to sum all the numbers
+        //      If they add up to the goal, this rule is satisfied
+        //  If we have a subtraction, we want to subtract all the small numbers from the biggest one
+        //      If the result is the goal, this rule is satisfied
 
-        } else if (operation == Operation.SUBTRACTION){
-            int total = 0;
-            for(int number: numbers){
-                if (total == 0){
-                    total = number;
-                } else {
-                    total -= number;
-                }
-            }
-            return total == goal;
 
-        } else if (operation == Operation.MULTIPLICATION){
-            int total = 1;
-            for(int number: numbers){
-                total *= number;
-            }
-            return total == goal;
-        }
         return false;
     }
 }
