@@ -2,17 +2,29 @@ package session_13b;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.*;
 
+/**
+ * This class implements the necessary methods to solve a KenKen puzzle
+ * using the Backtracking interface from the CS department.
+ */
 public class KenKenConfiguration implements Configuration{
 
+    /* A 2d array to represent the board */
     private int[][] board;
+    /* The dimensions of the board */
     private int dim;
+    /* The set of rules or regions for this board */
     private ArrayList<Rule> rules;
+    /* The row of the cell we must fill next */
     private int currentRow;
+    /* The column of the cell we must fill next */
     private int currentCol;
 
+    /**
+     * Main constructor for a KenKenConfiguration
+     * Reads the board and rules from a file and initializes the state
+     */
     public KenKenConfiguration(String filename){
         this.currentRow = 0;
         this.currentCol = 0;
@@ -53,18 +65,9 @@ public class KenKenConfiguration implements Configuration{
         }
     }
 
-    @Override
-    public String toString() {
-        String result = "\n";
-        for(int i = 0; i < dim; i++){
-            for(int j = 0; j < dim; j++){
-                result += this.board[i][j];
-            }
-            result += "\n";
-        }
-        return result;
-    }
-
+    /**
+     * A copy constructor to copy all the state by value and not by reference
+     */
     public KenKenConfiguration(KenKenConfiguration kenKenConfiguration){
         this.dim = kenKenConfiguration.dim;
         this.board = new int[this.dim][this.dim];
@@ -83,6 +86,25 @@ public class KenKenConfiguration implements Configuration{
         }
     }
 
+    /**
+     * For debugging purposes, the toString returns a string representing
+     * the current state of the board
+     */
+    @Override
+    public String toString() {
+        String result = "\n";
+        for(int i = 0; i < dim; i++){
+            for(int j = 0; j < dim; j++){
+                result += this.board[i][j];
+            }
+            result += "\n";
+        }
+        return result;
+    }
+
+    /**
+     * Returns a list of all the successors of this configuration
+     */
     @Override
     public Collection<Configuration> getSuccessors() {
         ArrayList<Configuration> successors = new ArrayList<>();
@@ -97,6 +119,11 @@ public class KenKenConfiguration implements Configuration{
         return successors;
     }
 
+    /**
+     * Returns whether this configuration is valid or not
+     * Used for pruning
+     * @return
+     */
     @Override
     public boolean isValid() {
         // Check Rows
@@ -124,41 +151,30 @@ public class KenKenConfiguration implements Configuration{
                 }
             }
         }
-
         return true;
     }
 
+    /**
+     * Return whether this configuration is a goal
+     */
     @Override
     public boolean isGoal() {
-//        int[][] goal = {
-//                {1,2,5,3,4},
-//                {2,4,3,5,1},
-//                {4,5,1,2,3},
-//                {5,3,4,1,2},
-//                {3,1,2,4,5}
-//        };
         if(currentRow != dim){
             return false;
-        }
-//        boolean found = true;
-//        for(int i=0; i < dim; i++){
-//            for(int j=0; j < dim; j++){
-//                if(this.board[i][j] != goal[i][j]){
-//                    found = false;
-//                }
-//            }
-//        }
-//        if(found){
-//            System.out.println(this);
-//        }
-        for(Rule rule: rules){
-            if(!rule.isSatisfied(this.board)){
-                return false;
+        } else {
+            for (Rule rule : rules) {
+                if (!rule.isSatisfied(this.board)) {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
     }
 
+    /**
+     * Starts the program and runs the backtracking algorithm
+     * @param args
+     */
     public static void main(String[] args) {
         KenKenConfiguration configuration = new KenKenConfiguration("5x5.txt");
         Backtracker backtracker = new Backtracker(false);

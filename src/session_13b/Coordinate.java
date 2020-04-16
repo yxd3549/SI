@@ -1,5 +1,9 @@
 package session_13b;
 
+/**
+ * This class is used to represent a coordinate in a grid.
+ * Simply put, it's just two numbers
+ */
 public class Coordinate {
 
     private int row;
