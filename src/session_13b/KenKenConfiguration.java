@@ -73,17 +73,34 @@ public class KenKenConfiguration implements Configuration{
         //  however, keep in mind that if you're at an edge, say
         //  (1, 3) in a 4x4 board, you'll want to increment the row by one
         //  and reset the column to 0
+        if (kenKenConfiguration.currentCol == kenKenConfiguration.dim - 1) {
+            this.currentCol = 0;
+            this.currentRow = kenKenConfiguration.currentRow + 1;
+        }
+        else {
+            this.currentCol = kenKenConfiguration.currentCol + 1;
+            this.currentRow = kenKenConfiguration.currentRow;
+        }
+
 
 
 
         // TODO: Copy all the primitive fields from the configuration passed in
         //  to -this- configuration.
+        this.board = new int[kenKenConfiguration.dim][kenKenConfiguration.dim];
+        for (int row = 0; row < kenKenConfiguration.dim; row++) {
+            for (int col = 0; col < kenKenConfiguration.dim; col++) {
+                this.board[row][col] = kenKenConfiguration.board[row][col];
+            }
+        }
+
 
 
         // TODO: Now think about the fields that aren't primitives
         //  remember that if those fields can change, you need to deep-copy them
         //  but if they never change, you can copy them just like a primitive field
-
+        this.rules = kenKenConfiguration.rules;
+        this.dim = kenKenConfiguration.dim;
 
     }
 
@@ -112,13 +129,20 @@ public class KenKenConfiguration implements Configuration{
         ArrayList<Configuration> successors = new ArrayList<>();
         // TODO: If we're at the end (i.e, if the current row is equal to the dimension of the board)
         //  return an empty list of successors
+        if (this.currentRow == this.dim-1) {
+            return successors;
+        }
 
 
         // TODO: Otherwise, create the next generation of successors
         //  Think about how many successors we will generate; you'll need to iterate that many times
         //  You'll have to create a copy of the current configuration, how do we do that?
         //  Every copy will then only be slightly different from each other, how?
-
+        for (int i = 1; i <= this.dim; i++) {
+            KenKenConfiguration newConfig = new KenKenConfiguration(this);
+            newConfig.board[this.currentRow][this.currentCol] = i;
+            successors.add(newConfig);
+        }
 
 
 
