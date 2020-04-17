@@ -124,7 +124,7 @@ public class KenKenConfiguration implements Configuration{
         ArrayList<Configuration> successors = new ArrayList<>();
         // TODO: If we're at the end (i.e, if the current row is equal to the dimension of the board)
         //  return an empty list of successors
-        if (this.currentRow == this.dim-1) {
+        if (this.currentRow == this.dim) {
             return successors;
         }
 
@@ -193,6 +193,7 @@ public class KenKenConfiguration implements Configuration{
 
         // TODO: Otherwise, check that all the rules are satisfied with this board
         //  This should be easy with your helper function!
+
         for (Rule rule: rules) {
 
             if (!(rule.isSatisfied(this.board))) {
