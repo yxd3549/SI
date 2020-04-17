@@ -82,9 +82,6 @@ public class KenKenConfiguration implements Configuration{
             this.currentRow = kenKenConfiguration.currentRow;
         }
 
-
-
-
         // TODO: Copy all the primitive fields from the configuration passed in
         //  to -this- configuration.
         this.board = new int[kenKenConfiguration.dim][kenKenConfiguration.dim];
@@ -93,8 +90,6 @@ public class KenKenConfiguration implements Configuration{
                 this.board[row][col] = kenKenConfiguration.board[row][col];
             }
         }
-
-
 
         // TODO: Now think about the fields that aren't primitives
         //  remember that if those fields can change, you need to deep-copy them
@@ -133,7 +128,6 @@ public class KenKenConfiguration implements Configuration{
             return successors;
         }
 
-
         // TODO: Otherwise, create the next generation of successors
         //  Think about how many successors we will generate; you'll need to iterate that many times
         //  You'll have to create a copy of the current configuration, how do we do that?
@@ -143,10 +137,6 @@ public class KenKenConfiguration implements Configuration{
             newConfig.board[this.currentRow][this.currentCol] = i;
             successors.add(newConfig);
         }
-
-
-
-
 
         return successors;
     }
@@ -163,10 +153,28 @@ public class KenKenConfiguration implements Configuration{
         //  What kind of data structure can we use to store elements and
         //  efficiently find out if we have already seen them?
         //  Note: Remember the default number in our board is 0
-
+        for(int i = 0; i < dim; i++){
+            TreeSet<Integer> numbers = new TreeSet<>();
+            for(int j =0; j < dim; j++){
+                int number = this.board[i][j];
+                if(number != 0 && numbers.contains(number)){
+                    return false;
+                }
+                numbers.add(number);
+            }
+        }
 
         // TODO: Check that no number is repeated in any column
-
+        for(int i = 0; i < dim; i++){
+            TreeSet<Integer> numbers = new TreeSet<>();
+            for(int j =0; j < dim; j++){
+                int number = this.board[j][i];
+                if(number != 0 && numbers.contains(number)){
+                    return false;
+                }
+                numbers.add(number);
+            }
+        }
 
         return true;
     }
