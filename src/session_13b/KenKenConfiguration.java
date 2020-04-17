@@ -187,12 +187,20 @@ public class KenKenConfiguration implements Configuration{
     public boolean isGoal() {
         // TODO: Check if we're at the end.
         //  If we're not, we know for sure this configuration is not a goal
-
+        if (currentRow != dim) {
+            return false;
+        }
 
         // TODO: Otherwise, check that all the rules are satisfied with this board
         //  This should be easy with your helper function!
+        for (Rule rule: rules) {
 
-        return false; // Remove this when you're done
+            if (!(rule.isSatisfied(this.board))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
