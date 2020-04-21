@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import session_11a.Observer;
 
 
 public class TicTacToeGUI extends Application implements Observer<TicTacToeModel> {

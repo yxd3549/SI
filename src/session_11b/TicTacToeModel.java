@@ -1,6 +1,5 @@
 package session_11b;
 
-import session_11a.Observer;
 import java.util.ArrayList;
 import java.util.List;
 
