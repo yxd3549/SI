@@ -11,7 +11,7 @@ package session_14a.model;
  *
  * @author RIT CS
  */
-public interface Observer<Subject, ClientData> {
+public interface Observer<Subject> {
     /**
      * The observed subject calls this method on each observer that has
      * previously registered with it. This version of the design pattern
@@ -32,5 +32,5 @@ public interface Observer<Subject, ClientData> {
      * @see <a href="https://sourcemaking.com/design_patterns/observer">the
      * Observer design pattern</a>
      */
-    void update(Subject subject, ClientData data);
+    void update(Subject subject);
 }

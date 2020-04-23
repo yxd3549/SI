@@ -19,7 +19,7 @@ import session_14a.model.*;
  *
  * @author RIT CS
  */
-public class LasersGUI extends Application implements Observer<LasersModel, ModelData> {
+public class LasersGUI extends Application implements Observer<LasersModel> {
     /** The UI's connection to the lasers.lasers.model */
     private LasersModel model;
 
@@ -108,7 +108,7 @@ public class LasersGUI extends Application implements Observer<LasersModel, Mode
     }
 
     @Override
-    public void update(LasersModel model, ModelData data) {
+    public void update(LasersModel model) {
         // TODO
     }
 }

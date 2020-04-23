@@ -3,7 +3,6 @@ package session_14a.ptui;
 import java.io.FileNotFoundException;
 
 import session_14a.model.LasersModel;
-import session_14a.model.ModelData;
 import session_14a.model.Observer;
 
 /**
@@ -14,7 +13,7 @@ import session_14a.model.Observer;
  * @author Sean Strout @ RIT CS
  * @author YOUR NAME HERE
  */
-public class LasersPTUI implements Observer<LasersModel, ModelData> {
+public class LasersPTUI implements Observer<LasersModel> {
     /** The UI's connection to the model */
     private LasersModel model;
 
@@ -41,7 +40,7 @@ public class LasersPTUI implements Observer<LasersModel, ModelData> {
     public LasersModel getModel() { return this.model; }
 
     @Override
-    public void update(LasersModel model, ModelData data) {
+    public void update(LasersModel model) {
         // TODO
     }
 }

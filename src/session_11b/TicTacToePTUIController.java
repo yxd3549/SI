@@ -7,10 +7,11 @@ public class TicTacToePTUIController {
 
     // TODO: much like the PTUI, the Controller needs to interact with the model.
     //  So what should be our private state?
+    private TicTacToeModel model;
 
-
-    public TicTacToePTUIController(){
+    public TicTacToePTUIController(TicTacToeModel model){
         // TODO: initialize said private state
+        this.model = model;
     }
 
     public void run(){
@@ -25,10 +26,20 @@ public class TicTacToePTUIController {
             int col = Integer.parseInt(line[1]);
 
             // Now let's tell the model to do its thing
+            if(this.model.getCharacter(row, col) != '-'){
+                System.out.println(" Dumb dumb, no");
+            } else {
+                this.model.placeMark(row, col);
+                placed++;
+            }
         }
     }
 
     public static void main(String[] args) {
+        TicTacToeModel model = new TicTacToeModel();
+        TicTacToePTUI ptui = new TicTacToePTUI(model);
+        TicTacToePTUIController controller = new TicTacToePTUIController(model);
+        controller.run();
     }
 
 }
